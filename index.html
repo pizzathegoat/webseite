@@ -5,148 +5,289 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iPizzaQu❦ Info Page</title>
     <style>
-        html, body {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
             height: 100%;
-            background-color: #000;
-            color: #fff;
-            font-family: Arial, sans-serif;
             overflow: hidden;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #000000 0%, #001a00 50%, #000000 100%);
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
         }
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 5px solid #00ffff;
-            box-sizing: border-box;
-            animation: borderGlow 2s infinite alternate;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
+        
+        /* Animierter Hintergrund mit Partikeln */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
         }
-        @keyframes fadeIn {
-            to {
+        
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(0, 255, 0, 0.5);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
                 opacity: 1;
             }
-        }
-        @keyframes borderGlow {
-            from {
-                border-color: #00ffff;
+            90% {
+                opacity: 1;
             }
-            to {
-                border-color: #ff00ff;
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
             }
         }
+        
+        /* Glühender Rahmen */
+        .border-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 3px solid;
+            border-image: linear-gradient(45deg, #00ff00, #00ff41, #00ff00) 1;
+            animation: borderRotate 4s linear infinite;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        @keyframes borderRotate {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+        
+        /* Container */
         .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 15px;
-            box-shadow: 0 0 20px #00ffff;
-            animation: containerGlow 2s infinite alternate;
             position: relative;
             z-index: 1;
-            transform: scale(0.8);
-            animation: popIn 1s forwards;
-            animation-delay: 2s;
+            text-align: center;
+            padding: 60px 40px;
+            background: rgba(0, 20, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            border: 2px solid rgba(0, 255, 0, 0.4);
+            box-shadow: 
+                0 0 60px rgba(0, 255, 0, 0.4),
+                0 0 100px rgba(0, 255, 0, 0.2),
+                inset 0 0 60px rgba(0, 255, 0, 0.1);
+            animation: containerFloat 6s ease-in-out infinite;
+            max-width: 600px;
         }
-        @keyframes containerGlow {
-            from {
-                box-shadow: 0 0 20px #00ffff;
+        
+        @keyframes containerFloat {
+            0%, 100% {
+                transform: translateY(0px);
             }
-            to {
-                box-shadow: 0 0 20px #ff00ff;
-            }
-        }
-        @keyframes popIn {
-            to {
-                transform: scale(1);
+            50% {
+                transform: translateY(-20px);
             }
         }
+        
+        /* Titel */
         h1 {
-            color: #00ffff;
-            font-size: 3em;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
-            animation: textGlow 1.5s infinite alternate;
+            font-size: 4em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ff00, #00ff41, #00ff00);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 40px;
+            animation: gradientShift 3s ease infinite;
+            text-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+            letter-spacing: 3px;
         }
-        @keyframes textGlow {
-            from {
-                text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+        
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
             }
-            to {
-                text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+            50% {
+                background-position: 100% 50%;
             }
         }
-        img {
-            max-width: 300px;
-            height: auto;
-            border: 5px solid #00ffff;
+        
+        /* Profilbild Container */
+        .image-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+        
+        .image-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(0, 255, 0, 0.4), transparent 70%);
             border-radius: 50%;
-            box-shadow: 0 0 20px #00ffff;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-            opacity: 0;
-            animation: imgFadeIn 1s forwards;
-            animation-delay: 2.5s;
+            animation: pulse 3s ease-in-out infinite;
+            z-index: 0;
         }
-        @keyframes imgFadeIn {
-            to {
-                opacity: 1;
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 0.8;
             }
         }
+        
+        img {
+            position: relative;
+            z-index: 1;
+            max-width: 280px;
+            height: auto;
+            border: 4px solid;
+            border-image: linear-gradient(45deg, #00ff00, #00ff41) 1;
+            border-radius: 50%;
+            box-shadow: 
+                0 0 40px rgba(0, 255, 0, 0.6),
+                0 0 80px rgba(0, 255, 0, 0.4),
+                inset 0 0 20px rgba(0, 255, 0, 0.2);
+            transition: all 0.5s ease;
+            animation: imageRotate 20s linear infinite;
+        }
+        
+        @keyframes imageRotate {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+        
         img:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 
+                0 0 60px rgba(0, 255, 0, 0.8),
+                0 0 120px rgba(0, 255, 0, 0.6);
         }
-        .button-container {
-            margin-top: 20px;
-            opacity: 0;
-            animation: buttonsFadeIn 1s forwards;
-            animation-delay: 3s;
+        
+        /* Untertitel */
+        .subtitle {
+            font-size: 1.5em;
+            color: #00ff00;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+            margin-top: 30px;
+            animation: subtitleGlow 2s ease-in-out infinite alternate;
+            letter-spacing: 2px;
         }
-        @keyframes buttonsFadeIn {
+        
+        @keyframes subtitleGlow {
+            from {
+                text-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+            }
             to {
-                opacity: 1;
+                text-shadow: 0 0 30px rgba(0, 255, 65, 0.8);
             }
         }
-        .button {
-            background: linear-gradient(45deg, #1a1a1a, #333);
-            color: #fff;
-            border: 2px solid #00ffff;
-            padding: 10px 20px;
-            margin: 5px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
-            box-shadow: 0 0 10px #00ffff;
+        
+        /* Dekorative Elemente */
+        .deco-line {
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff00, transparent);
+            margin: 20px auto;
+            animation: lineExpand 2s ease-in-out infinite alternate;
         }
-        .button:hover {
-            background: linear-gradient(45deg, #00ffff, #1a1a1a);
-            color: #000;
-            border-color: #00ffff;
-            box-shadow: 0 0 20px #00ffff, 0 0 30px #ff00ff;
+        
+        @keyframes lineExpand {
+            from {
+                width: 200px;
+            }
+            to {
+                width: 300px;
+            }
         }
-        .discord-button {
-            border-color: #00ffff !important;
-        }
-        .supercell-button {
-            border-color: #00ffff !important;
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+                margin: 20px;
+            }
+            
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            img {
+                max-width: 200px;
+            }
+            
+            .subtitle {
+                font-size: 1.2em;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Partikel Hintergrund -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Glühender Rahmen -->
+    <div class="border-glow"></div>
+    
+    <!-- Hauptcontainer -->
     <div class="container">
         <h1>iPizzaQu❦</h1>
-        <img src="https://images-ext-1.discordapp.net/external/_e-XcTkuyNFSMDir2vIRxYDX_ULWhihbn9abzrPJgK8/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/1175813898893537281/a_67f59cc06f5ee7e77562f3ef652424cc.gif" alt=" Bild">
-        <div class="button-container">
-            <a href="https://discord.com/invite/fearlesshood" class="button discord-button">Discord Server</a>
-            <a href="https://link.brawlstars.com/?supercell_id&p=07-872e6343-3462-4b75-b2bf-bd1c25637191" class="button supercell-button">Supercell ID ADD</a>
+        
+        <div class="image-container">
+            <div class="image-glow"></div>
+            <img src="https://images-ext-1.discordapp.net/external/2fbYANYT8f3mLZ4ENsDiRGDWNrjFYF_rdlEZnHEApQc/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/1175813898893537281/f8957716a9bec619ff77424ba5812c85.png?format=webp&quality=lossless" alt="iPizzaQu Profilbild">
         </div>
+        
+
     </div>
+    
+    <script>
+        // Partikel generieren
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 50;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            particlesContainer.appendChild(particle);
+        }
+    </script>
 </body>
 </html>
