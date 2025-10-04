@@ -171,8 +171,7 @@
             z-index: 1;
             max-width: 280px;
             height: auto;
-            border: 4px solid;
-            border-image: linear-gradient(45deg, #00ff00, #00ff41) 1;
+            border: 4px solid #00ff00;
             border-radius: 50%;
             box-shadow: 
                 0 0 40px rgba(0, 255, 0, 0.6),
@@ -479,7 +478,7 @@
                     background: radial-gradient(circle, ${primary}66, transparent 70%) !important;
                 }
                 img {
-                    border-image: linear-gradient(45deg, ${primary}, ${secondary}) 1 !important;
+                    border: 4px solid ${primary} !important;
                     box-shadow: 
                         0 0 40px ${primary}99,
                         0 0 80px ${primary}66,
